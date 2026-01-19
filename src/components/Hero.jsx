@@ -1,6 +1,8 @@
+import profile from "../assets/profile.png";
+
 const Hero = () => {
   return (
-    <section className="hero">
+    <section className="hero" id="home">
       <div className="hero-container">
 
         {/* LEFT */}
@@ -17,7 +19,10 @@ const Hero = () => {
             and scalable backend systems.
           </p>
 
-          <button className="hero-btn">Contact Me</button>
+          {/* CONTACT BUTTON */}
+          <a href="#contact">
+            <button className="hero-btn">Contact Me</button>
+          </a>
         </div>
 
         {/* RIGHT */}
@@ -25,7 +30,7 @@ const Hero = () => {
           <div className="circle-bg"></div>
 
           <img
-            src="/src/assets/profile.png"
+            src={profile}
             alt="Dipali"
             className="hero-img"
           />

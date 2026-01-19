@@ -1,7 +1,29 @@
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
+
 const Contact = () => {
-  const handleSubmit = (e) => {
+  const formRef = useRef();
+
+  const sendEmail = (e) => {
     e.preventDefault();
-    alert("Message sent successfully!");
+
+    emailjs
+      .sendForm(
+        "service_wijgswa",
+        "template_txjv867",
+        formRef.current,
+        "E9JbY_853Dnv1LWJy"
+      )
+      .then(
+        () => {
+          alert("Message sent successfully ✅");
+          formRef.current.reset();
+        },
+        (error) => {
+          alert("Failed to send message ❌");
+          console.log(error);
+        }
+      );
   };
 
   return (
@@ -9,22 +31,22 @@ const Contact = () => {
       <div className="contact-wrapper">
 
         <div className="contact-left">
-          <h2>
-            Contact me <br /> for more <br /> details.
-          </h2>
+          <h2>Let’s work together</h2>
+          <p>Have a project or just want to say hi?</p>
         </div>
 
-        <div className="contact-card">
-          <form onSubmit={handleSubmit}>
-            <label>Email</label>
-            <input type="email" required />
+        <form ref={formRef} onSubmit={sendEmail} className="contact-card">
+          <label>Name</label>
+          <input type="text" name="name" required />
 
-            <label>Message</label>
-            <textarea rows="4" required></textarea>
+          <label>Email</label>
+          <input type="email" name="email" required />
 
-            <button type="submit">Send Message</button>
-          </form>
-        </div>
+          <label>Message</label>
+          <textarea name="message" rows="4" required />
+
+          <button type="submit">Send Message</button>
+        </form>
 
       </div>
     </section>
